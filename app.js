@@ -6,6 +6,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/authRoutes.js");
 const productRoutes = require("./routes/productRoutes.js");
 const orderRoutes = require("./routes/orderRoutes.js");
+const userRoutes = require("./routes/userRoutes.js");
 const JWTMiddleware = require("./middleware/jwt.js");
 
 const corsOptions = {
@@ -27,6 +28,7 @@ app.get("/healthcheck", async (req, res) => {
 app.use("/api", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/orders", JWTMiddleware, orderRoutes);
+app.use("/api/me", JWTMiddleware, userRoutes);
 
 app.listen(port, () => {
   console.log("server is listening on port ", port);
